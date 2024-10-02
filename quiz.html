@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pseudo Java - Quiz</title>
+        <link rel="stylesheet" href="./style.css">
+        <script src="./script.js" type="text/javascript"></script>
+        <script src="./quiz.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="title">
+            It's time for a quiz! 📝
+        </div>
+        <br>
+        <div>
+            This quiz will be worth 40% of your grade with no retakes provided. Cheating is allowed :)
+            <br><br>
+            Answer the multiple choice questions and fill in the blanks. No time limit (plz keep it under 5 minutes for my grade 🙏)
+            <hr>
+            <div id="score"></div>
+            <div id="scoremsg"></div>
+            <form>
+                <label for="q1">
+                    1. Which one prints "Hello World" to the screen?
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q1" value="w-1-1">
+                        <java>system.out.println("Hello world");</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q1" value="w-1-2">
+                        <java>public console.log("Hello World");</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q1" value="c-1-1">
+                        <java>System.out.println("Hello World");</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q1" value="w-1-3">
+                        <java>print("Hello World");</java>
+                    </div>
+                </label>
+
+                <label for="q2">
+                    2. What does the % operator do?
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q2" value="w-2-1">
+                        <pre>Divides the world by 0</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio"name="q2" value="w-2-2">
+                        <pre>This isn't an operator</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q2" value="w-2-3">
+                        <pre>Gives the quotient</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q2" value="c-2-1">
+                        <pre>Gives the remainder</pre>
+                    </div>
+                </label>
+
+                <label for="q3">
+                    3. Which one of these numerical types support decimals?
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q3" value="w-3-1">
+                        <java>int</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q3" value="c-3-1">
+                        <java>double</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q3" value="c-3-2">
+                        <java>float</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q3" value="w-3-2">
+                        <java>short</java>
+                    </div>
+                </label>
+
+                <label for="q4">
+                    4. Which statement is the most appropriate?
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q4" value="c-4-1">
+                        <java>String language = "Java";</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q4" value="w-4-1">
+                        <java>int price = 4.99;</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q4" value="w-4-2">
+                        <java>char grade = 'A-';</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q4" value="w-4-3">
+                        <java>int isAbsent = true;</java>
+                    </div>
+                </label>
+
+                <label for="q5">
+                    5. How could I make a list of things in Java?
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q5" value="w-5-1">
+                        <java>String() shops = { "Ding Tea", "Paradise Palms", "Hale Aloha" };</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q5" value="w-5-2">
+                        <java>String{} schedule = [ "ENG 100", "ICS 211", "MATH 252A" ];</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q5" value="c-5-1">
+                        <java>String[] buildings = { "POST", "Bilger Hall", "Kuykendall Hall" };</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q5" value="w-5-3">
+                        <java>String{} songs = ( "SEASONS", "Letters", "self reliance" );</java>
+                    </div>
+                </label>
+
+                <label for="q6">
+                    6. What keywords are missing from the following statement?
+                    <div class="codeeditor quizsnippet">
+                        <java>
+                            // ...
+                            public static void main(String[] args) {
+                                | Assume this line of code is valid.
+                                boolean isAbsent = // ...
+                                ______ (isAbsent) {
+                                    System.out.println("I'm going to take 10% of your grade.");
+                                } ______ {
+                                    System.out.println("Here is a quiz that is worth 40% of your grade.");
+                                }
+                            }
+                            // ...
+
+                        </java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q6" value="c-6-1">
+                        <pre><span class="keyword">if</span> and <span class="keyword">else</span></pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q6" value="w-6-1">
+                        <pre><span class="keyword">is</span> and <span class="keyword">else</span></pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q6" value="w-6-2">
+                        <pre><span class="keyword">assume</span> and <span class="keyword">otherwise</span></pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q6" value="w-6-3">
+                        <pre><span class="keyword">if</span> and <span class="keyword">then</span></pre>
+                    </div>
+                </label>
+
+                <label for="q7">
+                    7. What are these snippets of code called?
+                    <div class="codeeditor quizsnippet">
+                        <java>
+                            public int addTwo(int number) {
+                                // ...
+                            }
+
+                            public void insertionSort(int[] array) {
+                                // ...
+                            }
+
+                            public int compareTo(Object other) {
+                                // ...
+                            }
+                        </java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q7" value="w-7-1">
+                        <pre>Parameters</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q7" value="c-7-1">
+                        <pre>Methods</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q7" value="w-7-2">
+                        <pre>Adults</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q7" value="w-7-3">
+                        <pre>Abstractions</pre>
+                    </div>
+                </label>
+
+                <label for="q8">
+                    8. How could I square a number in Java?
+                    <div class="codeeditor quizsnippet">
+                        <java>int n = // ...
+
+                        </java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q8" value="c-8-1">
+                        <java>int square = 42;</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q8" value="w-8-1">
+                        <java>int square = n + n - n / n;</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q8" value="c-8-2">
+                        <java>int square = n * n;</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q8" value="w-8-2">
+                        <java>int square = "[]";</java>
+                    </div>
+                </label>
+
+                <label for="q9">
+                    9. Write me a line of code that creates a class named CerealBox (You don't need curly braces)
+                    <input type="text">
+                </label>
+
+                <label for="q10">
+                    10. Fill in the blank to make the code valid:
+                    <div class="codeeditor quizsnippet">
+                        <java>
+                            public static int addIntegers(int x, int y) {
+                                ___ z = x + y;
+                                // Do things with z...
+                                return z;
+                            }
+                        </java>
+                    </div>
+                    <input type="text">
+                </label>
+
+                <label for="q11">
+                    11. How many times will the code in this loop be executed?
+                    <div class="codeeditor quizsnippet">
+                        <java>
+                            for(int i = 0; i &LT; 5; i++) {
+                                // Code ...
+                            }
+                        </java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q11" value="c-11-1">
+                        <java>5</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q11" value="w-11-1">
+                        <java>4</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q11" value="w-11-2">
+                        <java>0</java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q11" value="w-11-3">
+                        <java>69420360</java>
+                    </div>
+                </label>
+
+                <label for="q12">
+                    12. What is the keyword used to create a subclass?
+                    <div class="codeeditor quizsnippet">
+                        <java>
+                            public class Procrastinator _____ Student {
+                                // ...
+                            }
+                        </java>
+                    </div>
+                    <input type="text">
+                </label>
+
+                <label for="q13">
+                    13. What class was used to collect user input from the lecture?
+                    <input type="text">
+                </label>
+
+                <label for="q14">
+                    14. Will this code work as intended? Why?
+                    <div class="codeeditor quizsnippet">
+                    <java>
+                        double price = // Get user input...
+                        // Add the tax
+                        price += (price * 0.04F);
+                        // Then one of these statements will be printed
+                        | This can be read as "if price is greater than 9".
+                        if(price > 9) {
+                            System.out.println("Don't buy it");
+                        }
+                        if(price > 5) {
+                            System.out.println("Buy it");
+                        }
+                        if(price > 0) {
+                            System.out.println("It's (practically) free");
+                        }
+                    </java>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q14" value="w-14-1">
+                        <pre>Yes, the syntax is correct</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q14" value="w-14-2">
+                        <pre>No, tax is handled incorrectly</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q14" value="w-14-3">
+                        <pre>No, the syntax is wrong</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q14" value="c-14-1">
+                        <pre>No, you need else statements</pre>
+                    </div>
+                </label>
+
+                <label for="q15">
+                    15. What is this?
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q15" value="w-15-1">
+                        <pre>i dunno</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q15" value="c-15-1">
+                        <pre>It's used to access class members</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q15" value="c-15-2">
+                        <pre>A quiz</pre>
+                    </div>
+                    <div class="codeeditor quizsnippet">
+                        <input type="radio" name="q15" value="c-15-3">
+                        <pre>A bad activity</pre>
+                    </div>
+                </label>
+                <a class="submitbtn" id="submitbtn">Submit</a>
+            </form>
+        </div>
+    </body>
+</html>

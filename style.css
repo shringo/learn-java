@@ -1,0 +1,434 @@
+/* Great fonts! */
+
+@font-face {
+    font-family: 'JetbrainsMonoNL';
+    src: url("./jbm/fonts/ttf/JetBrainsMonoNL-Regular.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'JetbrainsMonoNL';
+    src: url("./jbm/fonts/ttf/JetBrainsMonoNL-Bold.ttf");
+    font-style: normal;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'JetbrainsMonoNL';
+    src: url("./jbm/fonts/ttf/JetBrainsMonoNL-Italic.ttf");
+    font-style: italic;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'JetbrainsMono';
+    src: url("./jbm/fonts/ttf/JetBrainsMono-Bold.ttf");
+    font-style: normal;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'JetbrainsMono';
+    src: url("./jbm/fonts/ttf/JetBrainsMono-Italic.ttf");
+    font-style: italic;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'JetbrainsMono';
+    src: url("./jbm/fonts/ttf/JetBrainsMono-Regular.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* META */
+
+java {
+    display: none;
+}
+
+html {
+    background-color: rgb(43,43,43);
+}
+
+body {
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+div:not(.line), .link {
+    color: rgb(222, 222, 222);
+    font-family: 'JetbrainsMono', monospace, Courier;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 5em;
+    text-align: center;
+}
+
+.linkcontainer {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    font-size: 2.1vb;
+}
+
+.link {
+    color: rgb(100, 150, 225);
+    text-decoration: underline;
+}
+
+.example {
+    color: rgb(188, 188, 188);
+    font-weight: bold;
+    font-style: italic;
+    font-size: 3vb;
+}
+
+.center {
+    width: 100%;
+    text-align: center;
+}
+
+/* CODE SYNTAX */
+
+[data-tooltip]:hover::after {
+    display: block;
+    position: absolute;
+    text-wrap: wrap;
+    content: attr(data-tooltip);
+    transition: all 0.1s ease-in;
+    border-radius: 3px;
+    box-shadow: 2px 2px 1px black;
+    color: rgb(222, 222, 222);
+    background: rgb(69,69,69);
+    margin-top: 10px;
+    padding: 5px;
+    z-index: 1;
+    line-height: normal;
+}
+
+a.btn[data-tooltip]:hover::after {
+    margin-top: 5em;
+}
+
+pre {
+    font-family: 'JetbrainsMono', monospace, Courier;
+    user-select: none;
+    font-size: 0.75em;
+    cursor: text;
+    color: #A9B7C6;
+}
+
+.line {
+    position: relative;
+    display: block;
+    text-wrap: wrap;
+    font-size: 1em;
+    width: 100%;
+}
+
+.keyword {
+    color: #CC7832;
+    font-weight: bold;
+}
+
+.misc {
+    color: #CC7832;
+}
+
+.field {
+    color: #9876AA;
+    font-style: italic;
+}
+
+.string {
+    color: #6A8759;
+    font-style: normal;
+}
+
+.string .keyword, .string .number, .string .method, .string .field, .string .misc {
+    color: inherit;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.comment {
+    color: #808080;
+}
+
+.number {
+    color: #6897BB;
+}
+
+.method {
+    color: #FFC66D;
+}
+
+.annotation {
+    color: #BBB529;
+}
+
+/* CSS SUCKS. */
+
+/* MOBILE */
+@media (max-device-width:720px) {
+    .codeeditor:not(.quizsnippet) {
+        display: block;
+    }
+
+    a.btn[data-tooltip]:hover::after {
+        display: none;
+    }
+
+    a.btnoff {
+        display: none !important;
+    }
+
+    pre {
+        font-size: 1em;
+    }
+    
+    div:not([class]) {
+        font-size: 2.75em;
+    }
+}
+
+/* SQUISHED BOWSER WINDOW */
+@media (max-width:800px) {
+    .codeeditor:not(.quizsnippet) {
+        display: block;
+    }
+
+    form {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    a.btn {
+        display: flex;
+    }
+}
+
+/* REGULAR BROWSER WINDOW */
+@media only screen and (min-width:800px) {
+    .codeeditor {
+        display: flex;
+        flex-shrink: 0;
+        padding: 5px;
+    }
+
+    .preview {
+        width: 100%;
+        padding-right: 25px;
+    }
+
+    div.console {
+        margin-left: auto;
+        min-width: 40%;
+        min-height: 100%;
+        padding-left: 10px;
+    }
+
+    form {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    [data-tooltip]:hover::after {
+        font-size: 1em;
+    }
+
+    a.btn {
+        display: flex;
+    }
+}
+
+/* CONSOLE STYLING */
+
+div.console {
+    background-color: rgb(20, 20, 20);
+    user-select: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 30px;
+    height: 100%;
+}
+
+div.consoleheader {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.cnstxt {
+    margin-left: auto;
+    font-style: italic;
+    font-size: 1.5vb;
+}
+
+a.btn {
+    background-color: rgb(43, 43, 43);
+    font-size: 2vb;
+    height: 2.5vh;
+    margin-right: 0.35em;
+    padding: 0.5vmin 0.5vmin;
+    width: 2.5vh;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border-radius: 2.5px;
+    cursor: pointer;
+}
+
+a.btnoff {
+    background-color: rgb(35, 35, 35);
+    cursor: not-allowed;
+}
+
+a.btn:hover:not(.btnoff) {
+    background-color: rgb(69, 69, 69);
+}
+
+a.btn:active:not(.btnoff) {
+    background-color: rgb(30, 30, 30);
+}
+
+a.run {
+    color: rgb(73, 156, 85);
+}
+
+hr {
+    border-color:rgb(123, 123, 123);
+    margin: 2em 0px;
+}
+
+.stout {
+    min-height: 120px;
+    height: 20vh;
+    padding: 5px 10px;
+    font-size: 2vb;
+    word-break: normal;
+    overflow-y: scroll;
+}
+
+/* QUIZ */
+
+.quizbtn {
+    font-family: 'JetbrainsMono', monospace, Courier;
+    background-color: #CC7832;
+    color: #000000;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 3vh;
+    padding: 12.5px;
+    cursor: pointer;
+}
+
+label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.questions {
+    justify-content: center;
+}
+
+form {
+    width: 75%;
+    display:grid;
+    justify-content: center;
+}
+
+input, label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    font-family: 'JetbrainsMono', monospace, Courier;
+    margin-bottom: 10px;
+}
+
+.quizsnippet {
+    display: flex;
+    justify-items: center;
+    vertical-align: middle;
+    gap: 10px;
+    font-weight: normal;
+    text-wrap: pretty;
+}
+
+label {
+    margin-bottom: 50px;
+    font-size: 3vb;
+}
+
+.submitbtn {
+    background-color: rgb(73, 156, 85);
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 10px;
+    border-radius: 10px;
+    width: min-content;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+input[type="text"] {
+    background-color: rgb(20, 20, 20);
+    color: #A9B7C6;
+    padding: 10px;
+    width: 100%;
+    font-size: 1.5em;
+    margin-top: 1em;
+}
+
+input[type="radio"] {
+    accent-color: #00ff00;
+    vertical-align: baseline;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+div.correct {
+    background-color: rgb(57, 167, 70);
+    color: rgb(202, 202, 202);
+    padding: 10px;
+    border-width: 5px;
+    margin: 20px 0px;
+}
+
+div.wrong {
+    background-color: rgb(189, 50, 50);
+    color: rgb(56, 56, 56);
+    padding: 10px;
+    border-width: 5px;
+    margin: 20px 0px;
+}
+
+.answer {
+    background-color: rgb(27, 77, 41);
+}
+
+.wrongchoice {
+    background-color: rgb(77, 27, 27);
+}
+
+.quizsnippet[data-tooltip]:hover:after {
+    font-size: 0.75em;
+    margin-top: 3.6em;
+    max-width: 50%;
+}
+
+#score {
+    font-size: 5em;
+    text-align: center;
+}
+
+#scoremsg {
+    font-size: 5vb;
+    text-align: center;
+    margin-bottom: 50px;
+}

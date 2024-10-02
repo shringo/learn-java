@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pseudo Java - About</title>
+        <link rel="stylesheet" href="./style.css">
+        <script src="./script.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="title">
+            "WTF is this?" 🤔
+        </div>
+        <br>
+        <a class="link" href="./index.html">
+            Go home
+        </a>
+        <br><br>
+        <div>
+            <h1>Intro</h1>
+            <i>"What is one skill that the world should learn?"</i>
+            <br>
+            <pre>   -A question posed by ENG100 professor: Self-Intro Presentation</pre>
+            <br>
+            The presentation is split up into a lecture and activity and is meant to be done in about 10 minutes. This website is intended to be the "activity" portion.
+            <br><br>
+            Java syntax highlighting was written by me, no third party libraries were used.
+            <br><br>
+            Runnable demos do not translate the Java code into JavaScript on demand.
+            <br><br>
+            Indirect help from stackoverflow on tooltips and shortening code
+            <br><br>
+            See the (janky) source code <a class="link" href="https://github.com/shringo/learn-java">here</a>.
+            <br><br>
+            How to pronounce pseudo: Puh-sway-doh
+            <h1>"Technical" Details</h1>
+            I don't know why I didn't just use a library such as <a class="link" href="https://highlightjs.org/">highlight.js</a>, but I guess I wanted a challenge and to impress the class. (I also wasn't looking for something like that 😬)
+            <br><br> 
+            So, in order to do my own highlighting, I created a custom HTML tag named "java", inside an div with codeeditor as the class. Then, I linked a script so we look for every element with the codeeditor class. We go through each line of code, word by word (separated by spaces) and apply the appropriate color to that word through CSS classes by placing it inside of a span tag.
+            <br><br>
+            Doing String highlighting was the worst to implement in my opinion. I ended up doing syntax highlighting and running RegExps on the almost finished HTML code, and did this with other things like commas, semicolons, comments, and making method names yellow. Syntax highlighting is obviously made on demand, if you ask. (View the HTML file source on GitHub, and open DevTools when opening the main webpage if you don't believe me)
+            <br><br>
+            You can easily break the highlighting by putting numbers in a class' or method's name. I had a few midterms coming up and just did whatever worked. 
+            <br><br>
+            The "Runnable Demos" were easy to implement. You add a script tag under the codeeditor and write the JavaScript interpretation of the Java code. eval() is used to execute that code, and I redirected all calls to console.log to pipe to an element temporarily. Writing my own Java compiler would've been out of the scope in terms of time. 
+            <br><br>
+            Once again, if you are interested, you can view the janky source code <a class="link" href="https://github.com/shringo/learn-java">here</a>.
+            <br><br>
+            In terms of design, I drew heavy inspiration from my favorite IDE: <a class="link" href="https://www.jetbrains.com/idea/">Intellij Idea CE</a>. The <a class="link" href="https://www.jetbrains.com/lp/mono/">font used on this webpage</a> is also made by them.
+        </div>
+    </body>
+</html>

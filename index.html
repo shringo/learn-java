@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pseudo Java - Learn</title>
+        <link rel="stylesheet" href="./style.css">
+        <script src="./script.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="title">
+            Learning Java ☕️
+        </div>
+        <br>
+        <div class="linkcontainer">
+            <a class="link" href="./about.html">
+                WTF is this?
+            </a>|
+            <a class="link" href="https://github.com/shringo/learn-java">
+                GitHub Source
+            </a>
+        </div>
+        <br><br>
+        <div>
+        Hover above different parts of the code in each example to learn what each part does.
+        Based off of what you learned from the lecture and the code, try the quiz after.
+        </div>
+        <br>
+        <div class="example">
+            Example 1 - "Hello World" 🌶️
+        </div>
+        <div class="codeeditor">
+            <java>
+                | In order to run any code in Java, we need these first 2 lines of code.
+                | Otherwise, Java will give us an error before we can even run the code.
+                public class HelloWorld {
+                    | The line above can have HelloWorld replaced with anything.
+                    | However, "main" will need to be called main for Java to access it.
+                    | Don't worry about public or static, it's just what Java expects.
+                    | void means this method (named main) won't return anything.
+                    public static void main(String[] args) {
+                    | System.out.println(•••) is Java's way of displaying input to a text-only window called a console or terminal.
+                    | Note that System is capitalized. If it were lowercase, this program wouldn't be able to run.
+                        System.out.println("Hello world!");
+                    }
+                }
+            </java>
+            <script type="text/javascript" data-label="Ex 1. Hello World">
+                console.log("Hello world!");
+            </script>
+        </div>
+        <div class="example">
+            Example 2 - "Math" 🌶️
+        </div>
+        <div class="codeeditor">
+            <!-- To add comments just add a pipe character before whatever u wanna write -->
+            <java>
+                public class Math {
+                    public static void main(String[] args) {
+                        | We set an integer (whole number) variable named "x" to the value 5.
+                        int x = 5;
+                        | Then we do the same with y, except we set it to 3.
+                        int y = 3;
+                        | This is a comment. Comments are used to explain complicated lines of code. Java will ignore these.
+                        // A math operation you may have never heard of...
+                        | You have learned math operators like +(addition) -(subtraction) *(multiplication) ÷(division, also /), but not % (the modulo operator). 
+                        | This is like division, except instead of getting how many times y can go into x, we get the remainder from division.
+                        System.out.println("The remainder of when " + x + " is divided by " + y + ": " + (x % y));
+                    }
+                }
+            </java>
+            <script type="text/javascript" data-label="Ex 2. Math">
+                var x = 5;
+                var y = 3;
+                console.log("The remainder of when " + x + " is divided by " + y + ": " + (x % y));
+            </script>
+        </div>
+        <div class="example">
+            Example 3 - "Arrays" 🌶️🌶️
+        </div>
+        <div class="codeeditor">
+            <java>
+                | Here to simplify the code.
+                import java.util.Arrays;
+
+                public class Arrayz {
+                    public static void main(String[] args) {
+                        | We define an array (a list of things) using the following syntax.
+                        | Arrays maintain order, and can also have duplicate elements.
+                        String[] days = { "today", "yesterday", "tomorrow" };
+                        | Then, we print out the contents by using that imported Java package.
+                        System.out.println(Arrays.toString(days));
+                    }
+                }
+            </java>
+            <script type="text/javascript" data-label="Ex 3. Arrays">
+                const list = ["today", "yesterday", "tomorrow"];
+                console.log('[' + list.join(', ') + ']');
+            </script>
+        </div>
+
+        <div class="example">
+            Example 4 - "Flow Control" 🌶️🌶️🌶️
+        </div>
+        <div class="codeeditor">
+            <java>
+                public class FControl {
+                    public static void main(String[] args) {
+                        | This is the cost of some food I bought at Campus Center Food Court.
+                        | In the runnable demo, we pick a random cost. Try and see if you can get all 4 branches to activate.
+                        float cost = // •••
+                        | Print out the cost so we know what we're looking at...
+                        System.out.println("Cost: " + cost);
+                        | Meal swipes at CCFC is worth $6 for 1 swipe, $12 for 2, and so on.
+                        | To be cost effective, we don't want to use 1 swipe on a $5 or even a $3 meal.
+                        | To determine how many swipes we need, we just check if the cost is under $6 (1 swipe), $12 (2 swipes), $18 (3 swipes) and so on. 
+                        | If the cost was under 6 (dollars), then we execute the code inside of this block, denoted using curly braces.
+                        if(cost < 6) {
+                            System.out.println("Pay with cash or points instead of a meal swipe.");
+                        | And if the cost was under 12 dollars, then we execute the code inside of this block.
+                        } else if(cost < 12) {
+                            System.out.println("Use 1 meal swipe with points.");
+                        | You get the point...
+                        } else if(cost < 18) {
+                            System.out.println("Use 2 meal swipes with points.");
+                        | But if none of these conditions are met, we know that the cost is beyond 18 dollars.
+                        } else {
+                            System.out.println("Find something cheaper to eat!!");
+                        }
+                    }
+                }
+            </java>
+            <script type="text/javascript" data-label="Ex 4. Flow Control">
+                let item = [13.06, 4.95, 6.66, 20.05];
+                let cost = item[Math.floor(Math.random() * item.length)];
+                console.log("Cost: " + cost);
+                if(cost < 6) {
+                    console.log("Pay with cash instead of a meal swipe.");
+                } else if(cost < 12) {
+                    console.log("Use 1 meal swipe with points.");
+                } else if(cost < 18) {
+                    console.log("Use 2 meal swipes with points.");
+                } else {
+                    console.log("Find something cheaper to eat!!");
+                }
+            </script>
+        </div>
+
+        <div class="example">
+            Example 5 - "Loops" 🌶️🌶️🌶️🌶️
+        </div>
+        <div class="codeeditor">
+            <java>
+                public class Loops {
+                    public static void main(String[] args) {
+                        | There's a lot to break down here.
+                        | To define a loop, we start by defining a variable we're using for counting (int i = 0). In this case, we want i set to 0.
+                        | 
+                        | Then comes the condition (i less than 10). If i is less than 10, we execute the code inside the loop. If not, we don't execute it.
+                        | 
+                        | And finally is the part where we add to i (i = i + 1). i is always modified after the code inside the loop is executed.
+                        | 
+                        | The condition is checked, the code inside is executed, and i is added to until the condition fails.
+                        | For shorthand, instead of writing i = i + 1, we can just write i++
+                        for(int i = 0; i &lt; 10; i = i + 1) {
+                            | And inside the loop, we just print out what i is.
+                            | Be warned that we start at 0, and end at 9 because when i becomes 10, it is not less than 10.
+                            System.out.println(i);
+                        }
+                    }
+                }
+            </java>
+            <script type="text/javascript" data-label="Ex 5. Loops">
+                for(var i = 0; i < 10; i++) {
+                    console.log(i);
+                }
+            </script>
+        </div>
+
+        <div class="example">
+            Advanced Example (Optional) - "Object Oriented Programming" :) 🌶️🌶️🌶️🌶️🌶️
+        </div>
+        <div class="codeeditor">
+            <java>
+                | Abstract classes allow us to create "blueprint" classes. We can't use them directly, but it specifies a vague group, and we can create more specific groups from this class.
+                | 
+                | Everyone in this room, sans professor, is a Student.
+                public abstract class Student {
+                    | We declare "member" variables that are private, so only the class and its' children can access them.
+                    private String name;
+                    private int year;
+
+                    | This "method" has no return type because it is a special method called a constructor. When an subclass instance of student is created, this is the first method that gets called.
+                    | You will usually see the return type wedged between the "public" and method name.
+                    public Student(String name, int year) {
+                        | this.name refers to the private String name variable outside of the constructor.
+                        | name by itself refers to the argument passed in the constructor (Student(String name •••))
+                        this.name = name;
+                        this.year = year;
+                    }
+                    
+                    | Abstract classes allow us to define methods with no body.
+                    | These will need to be implemented by the Student class' children.
+                    public abstract char getGrade();
+                    public abstract void doHomework();
+
+                    | If we pass a student object to System.out.println(•••), then this method will be called. Otherwise, the memory address is printed, which doesn't tell us anything useful.
+                    public String toString() {
+                        | Note that we never used "this" here.
+                        | We only needed this if we needed to access a member variable if there was also an argument or variable defined in the same block of code with the same name.
+                        | To distinguish the variables from each other, we access the member using this, and the local variable without this.
+                        return name + " has been here for " + year + "year(s)";
+                    }
+                }
+
+                | Here is a subclass, or a variant of student called Procrastinator.
+                | 
+                | Are you one?
+                |
+                | To have Procrastinator be a different type of Student, we add the extends keyword.
+                class Procrastinator extends Student {
+                    | The constructor needs to be the same name, cAsE sEnSiTiVe, as the class name.
+                    public Procrastinator(String name, int year) {
+                        | ...And the first call in every constructor has to match a constructor from the class we're directly extending from.
+                        | Super arguments must be the same type.
+                        super(name, year);
+                    }
+
+                    | Ignore this, it's more for readability.
+                    @Override
+                    | Look at how the Student class had the same method signature (that is, the same name, arguments, and return type) as this method.
+                    | In non-abstract classes like this one, we have to write code for any bodyless (abstract) methods, while also dropping the abstract keyword.
+                    public char getGrade() {
+                        | Characters in Java only allow one character... and are defined using apostrophes ('')
+                        | Strings (like the one in the HelloWorld class) are defined using quotation marks ("")
+                        return 'F';
+                    }
+
+                    @Override
+                    | Void methods don't need to return anything. In getGrade, we have a return statement next to a character, satisfying Java.
+                    | Here, we don't need a return statement, but if we do have one, then it can't be next to anything.
+                    public void doHomework() {
+                        System.out.println("I'll do it later...");
+                    }
+                }
+            </java>
+        </div>
+        <div class="center">
+            <a class="quizbtn" href="./quiz.html" title="It'll be ez :)">Take the quiz.</a>
+        </div>
+    </body>
+</html>
