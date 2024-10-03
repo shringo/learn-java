@@ -106,28 +106,20 @@ window.addEventListener("DOMContentLoaded", function() {
                     .replaceAll(keywordRegex, `<span class="keyword">$&</span>`)
                     .replaceAll(annotationRegex, `<span class="annotation">$&</span>`)
                     .replaceAll(numberRegex, `<span class="number">$&</span>`)
-                    .replaceAll(/(?<!data-tooltip=("|')[^<>]*?)(?<!&(l|g)t)(,|;)/gs, `<span class="misc">$&</span>`);
+                    .replaceAll(/(?<!data-tooltip=("|')[^<>]*?)(?<!&(l|g)t)(,|;)/gs, `<span class="misc">$&</span>`)
+                    .replaceAll(/(?<=\.\s*?)(?<!data-tooltip=("|')[^"']*?)\w+?(?=\s*?\.)/gms, `<span class="field">$&</span>`)
+                    .replaceAll(/\/\/.*/g, `<span class="comment">$&</span>`);
 
                 if(toolTip.length) {
                     lineEl.setAttribute("data-tooltip", toolTip);
-
-                    lineEl.setAttribute("onclick",`
-                        if(this.classList.contains("mobiletooltip")) this.classList.remove("mobiletooltip"); else this.classList.add("mobiletooltip");
-                    `);
+                    // Here for mobile support (click to make tooltip visible until we click on it again)
+                    lineEl.setAttribute("onclick",`if(this.classList.contains("mobiletooltip")) this.classList.remove("mobiletooltip"); else this.classList.add("mobiletooltip");`);
                     toolTip = "";
                 }
                 preview.appendChild(lineEl);
                 if(cIn != lines.length - 1) preview.appendChild(document.createElement("br"));
             }
         }  
-        preview.innerHTML = preview.innerHTML
-        //     .replaceAll(
-        //         /(?<=\.\s*?)(?<!data-tooltip=("|')[^"']*?)\w+?(?=\s*?\.)/gms,
-        //         "<span class=\"field\">$&</span>")
-        //     .replaceAll(
-        //         /\/\/.*?(?=<br>)/g,
-        //         "<span class='comment'>$&</span>");
-        /* */
         element.appendChild(preview);
 
         // Add console
