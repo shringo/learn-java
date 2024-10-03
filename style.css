@@ -94,22 +94,6 @@ div:not(.line), .link {
 
 /* CODE SYNTAX */
 
-[data-tooltip]:hover::after {
-    display: block;
-    position: absolute;
-    text-wrap: wrap;
-    content: attr(data-tooltip);
-    transition: all 0.1s ease-in;
-    border-radius: 3px;
-    box-shadow: 2px 2px 1px black;
-    color: rgb(222, 222, 222);
-    background: rgb(69,69,69);
-    margin-top: 10px;
-    padding: 5px;
-    z-index: 1;
-    line-height: normal;
-}
-
 a.btn[data-tooltip]:hover::after {
     margin-top: 5em;
 }
@@ -170,55 +154,12 @@ pre {
     color: #BBB529;
 }
 
-/* CSS SUCKS. */
+/* CSS SUCKS. 
 
-/* MOBILE */
-@media (max-device-width:720px) {
-    .codeeditor:not(.quizsnippet) {
-        display: block;
-        font-size: 2.75em;
-    }
+What happens when you design on laptop in chrome before learning mobile devices exist
 
-    a.btn[data-tooltip]:hover::after {
-        display: none;
-    }
-
-    a.btnoff {
-        display: none !important;
-    }
-
-    pre {
-        font-size: 0.75em;
-    }
-    
-    div:not([class]) {
-        font-size: 2.75em;
-    }
-
-    .submitbtn, .quizbtn {
-        margin-bottom: 5em;
-    }
-}
-
-/* SQUISHED BOWSER WINDOW */
-@media (max-width:800px) {
-    label .codeeditor {
-        font-size: 0.75em;
-    }
-
-    .codeeditor:not(.quizsnippet) {
-        display: block;
-    }
-
-    form {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    a.btn {
-        display: flex;
-    }
-}
+THANKS A LOT CSS.
+*/
 
 /* REGULAR BROWSER WINDOW */
 @media only screen and (min-width:800px) {
@@ -255,6 +196,91 @@ pre {
 
     a.btn {
         display: flex;
+    }
+}
+
+/* SQUISHED BOWSER WINDOW */
+@media only screen and (max-width:800px) {
+    label .codeeditor {
+        font-size: 0.75em;
+    }
+
+    .codeeditor:not(.quizsnippet) {
+        display: block;
+    }
+
+    form {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    a.btn {
+        display: flex;
+    }
+}
+
+/* If this works for mobile, then the tooltip stays stuck on screen */
+@media only screen and (min-device-width:701px) {
+    [data-tooltip]:hover::after {
+        display: block;
+        position: absolute;
+        text-wrap: wrap;
+        content: attr(data-tooltip);
+        border-radius: 3px;
+        box-shadow: 2px 2px 1px black;
+        color: rgb(222, 222, 222);
+        background: rgb(69,69,69);
+        margin-top: 10px;
+        padding: 5px;
+        z-index: 1;
+        line-height: normal;
+    }
+}
+
+/* MOBILE */
+@media only screen and (max-device-width:700px) {
+    .mobiletooltip[data-tooltip]::after {
+        display: block;
+        position: absolute;
+        text-wrap: wrap;
+        content: attr(data-tooltip);
+        border-radius: 3px;
+        box-shadow: 2px 2px 1px black;
+        color: rgb(222, 222, 222);
+        background: rgb(69,69,69);
+        margin-top: 10px;
+        padding: 5px;
+        z-index: 1;
+        line-height: normal;
+    }
+    
+    .codeeditor:not(.quizsnippet) {
+        display: block;
+        font-size: 2.45em;
+    }
+
+    a.btn[data-tooltip]:hover::after {
+        display: none;
+    }
+
+    a.btnoff {
+        display: none !important;
+    }
+
+    pre {
+        font-size: 0.9em;
+    }
+    
+    div:not([class]) {
+        font-size: 2.75em;
+    }
+
+    .submitbtn {
+        margin-bottom: 5em;
+    }
+
+    .center {
+        margin-bottom: 10em;
     }
 }
 

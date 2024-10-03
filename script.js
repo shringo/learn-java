@@ -24,12 +24,12 @@ function handleNons(i, matches, match, wordEl) {
     wordEl.appendChild(handleThis(match.input.substring(match.index + match[0].length, (matches[parseInt(i) + 1]?.index || match.input.length))));
 }
 
-// 
+// Adds whatever you will see in the java tags
 const noFormat = false;
-const keywordRegex = new RegExp("(?<!\\w|((a|div|pre) (class)?[^<]*?))(" + keywords.join('|') + ")(?!\\w)", 'g');
-const numberRegex = /\d(\d|_)*([FLDfld])?/g;
+const keywordRegex = new RegExp("(?<!\\w|((span|div|pre) (class)?[^<]*?))(" + keywords.join('|') + ")(?!\\w)", 'g');
+const numberRegex = /\d\.?(\d|_)*([FLDfld])?/g;
 const annotationRegex = /@[A-Za-z]+/g;
-const methodRegex = /(?<!new|=)(?<=\w)\s([A-Za-z_]+\w)(?=\s*?\()/g;
+const methodRegex = /(?<!new|=|^\s*)(?<=^[\s\w]+)\s([A-Za-z_]+\w)(?=\s*?\()/g;
 
 /**
  * @param {string} str 
@@ -83,12 +83,12 @@ window.addEventListener("DOMContentLoaded", function() {
                 lineEl.innerText = line;
                 for(const regex of [
                     // Safari doesn't do lookarounds correctly. Involved MAJOR refactoring of code
-                    // add tooltip at the end so we can simply stay focused on strings without HTML attributes making life hard
-                    [/(?<!(\\|<a\s+class=(("|')?string("|')?>?)?))"/m, `"`],
-                    [/(?<!(\\|<a\s+class=(("|')?string("|')?>?)?))'/m, `'`]
+                    // add tooltip and other formattings at the end so we can simply stay focused on strings without HTML attributes making life hard
+                    [/(?<!(\\|<span\s+class=(("|')?string("|')?>?)?))"(?!<\/span>)/m, `"`],
+                    [/(?<!(\\|>"[^"]*|<span\s+class=(("|')?string("|')?>?)?))'(?!<\/span>)/m, `'`]
                 ]) {
-                    const stSt = `<a class='string'>${regex[1]}`;
-                    const enSt = `${regex[1]}</a>`;
+                    const stSt = `<span class='string'>${regex[1]}`;
+                    const enSt = `${regex[1]}</span>`;
                     var times = 0;
                     while(regex[0].test(lineEl.innerHTML)) {
                         lineEl.innerHTML = lineEl.innerHTML.replace(regex[0], 
@@ -98,15 +98,22 @@ window.addEventListener("DOMContentLoaded", function() {
                         if(times > 50) break;
                     }
                 }
+
+                /* */
                 
                 lineEl.innerHTML = lineEl.innerHTML
-                    .replaceAll(methodRegex, "<a class='method'>$&</a>")
-                    .replaceAll(keywordRegex, `<a class="keyword">$&</a>`)
-                    .replaceAll(annotationRegex, `<a class="annotation">$&</a>`)
-                    .replaceAll(numberRegex, `<a class="number">$&</a>`);
+                    .replaceAll(methodRegex, "<span class='method'>$&</span>")
+                    .replaceAll(keywordRegex, `<span class="keyword">$&</span>`)
+                    .replaceAll(annotationRegex, `<span class="annotation">$&</span>`)
+                    .replaceAll(numberRegex, `<span class="number">$&</span>`)
+                    .replaceAll(/(?<!data-tooltip=("|')[^<>]*?)(?<!&(l|g)t)(,|;)/gs, `<span class="misc">$&</span>`);
 
                 if(toolTip.length) {
                     lineEl.setAttribute("data-tooltip", toolTip);
+
+                    lineEl.setAttribute("onclick",`
+                        if(this.classList.contains("mobiletooltip")) this.classList.remove("mobiletooltip"); else this.classList.add("mobiletooltip");
+                    `);
                     toolTip = "";
                 }
                 preview.appendChild(lineEl);
@@ -114,15 +121,12 @@ window.addEventListener("DOMContentLoaded", function() {
             }
         }  
         preview.innerHTML = preview.innerHTML
-            .replaceAll(
-                /(?<=\.\s*?)(?<!data-tooltip=("|')[^"']*?)\w+?(?=\s*?\.)/gms,
-                "<a class=\"field\">$&</a>")
-            .replaceAll(
-                /\/\/.*?(?=<br>)/g,
-                "<a class='comment'>$&</a>")
-            .replaceAll(
-                /(?<!data-tooltip=("|')[^<>]*?)(?<!&(l|g)t)(,|;)/gs,
-                "<a class='misc'>$&</a>"); 
+        //     .replaceAll(
+        //         /(?<=\.\s*?)(?<!data-tooltip=("|')[^"']*?)\w+?(?=\s*?\.)/gms,
+        //         "<span class=\"field\">$&</span>")
+        //     .replaceAll(
+        //         /\/\/.*?(?=<br>)/g,
+        //         "<span class='comment'>$&</span>");
         /* */
         element.appendChild(preview);
 
