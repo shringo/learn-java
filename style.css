@@ -117,7 +117,6 @@ a.btn[data-tooltip]:hover::after {
 pre {
     font-family: 'JetbrainsMono', monospace, Courier;
     user-select: none;
-    font-size: 0.75em;
     cursor: text;
     color: #A9B7C6;
 }
@@ -145,7 +144,7 @@ pre {
 }
 
 .string {
-    color: #6A8759;
+    color: #6A8759 !important;
     font-style: normal;
 }
 
@@ -177,6 +176,7 @@ pre {
 @media (max-device-width:720px) {
     .codeeditor:not(.quizsnippet) {
         display: block;
+        font-size: 2.75em;
     }
 
     a.btn[data-tooltip]:hover::after {
@@ -188,16 +188,24 @@ pre {
     }
 
     pre {
-        font-size: 1em;
+        font-size: 0.75em;
     }
     
     div:not([class]) {
         font-size: 2.75em;
     }
+
+    .submitbtn, .quizbtn {
+        margin-bottom: 5em;
+    }
 }
 
 /* SQUISHED BOWSER WINDOW */
 @media (max-width:800px) {
+    label .codeeditor {
+        font-size: 0.75em;
+    }
+
     .codeeditor:not(.quizsnippet) {
         display: block;
     }
@@ -214,6 +222,10 @@ pre {
 
 /* REGULAR BROWSER WINDOW */
 @media only screen and (min-width:800px) {
+    label .codeeditor {
+        font-size: 0.75em;
+    }
+
     .codeeditor {
         display: flex;
         flex-shrink: 0;
@@ -273,7 +285,7 @@ a.btn {
     background-color: rgb(43, 43, 43);
     font-size: 2vb;
     height: 2.5vh;
-    margin-right: 0.35em;
+    margin-right: 0.5em;
     padding: 0.5vmin 0.5vmin;
     width: 2.5vh;
     align-items: center;
@@ -302,6 +314,10 @@ a.run {
 
 hr {
     border-color:rgb(123, 123, 123);
+    margin: 2vmin 0px;
+}
+
+hr:not(.nomg) {
     margin: 2em 0px;
 }
 
@@ -356,7 +372,7 @@ input, label {
     vertical-align: middle;
     gap: 10px;
     font-weight: normal;
-    text-wrap: pretty;
+    text-wrap: wrap;
 }
 
 label {

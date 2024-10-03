@@ -21,69 +21,35 @@ const keywords = [
  * @param {HTMLElement} wordEl 
  */
 function handleNons(i, matches, match, wordEl) {
-    handleThis(match.input.substring(match.index + match[0].length, (matches[parseInt(i) + 1]?.index || match.input.length))).forEach(e => wordEl.appendChild(e));
+    wordEl.appendChild(handleThis(match.input.substring(match.index + match[0].length, (matches[parseInt(i) + 1]?.index || match.input.length))));
 }
 
+// 
 const noFormat = false;
-const wordRegex = /[a-zA-Z]+/g;
-const stringRegex = /(?<!\\)("|')/g;
+const keywordRegex = new RegExp("(?<!\\w|((a|div|pre) (class)?[^<]*?))(" + keywords.join('|') + ")(?!\\w)", 'g');
 const numberRegex = /\d(\d|_)*([FLDfld])?/g;
-const annotationRegex = /^@[A-Za-z]+/g;
-const extrasRegex = /;|,/g;
-const variableRegex = /^[A-Za-z]\w*/g;
-const accessFieldRegex = /(?<=\.\s*)[A-Za-z_]\w*\b(?!\()/g;
-const methodRegex = /(?<!(new|<\/span>|<span>|=|\s)*?)(?<=(<\/span>|<span>)*?<span>\s*?)[A-Za-z_]\w+(?=\s*?(<\/span>|<span>)*?\()(?![{[])/g;
+const annotationRegex = /@[A-Za-z]+/g;
+const methodRegex = /(?<!new|=)(?<=\w)\s([A-Za-z_]+\w)(?=\s*?\()/g;
 
 /**
  * @param {string} str 
  */
-function handleThis(str, it=0) {
-    it++;
-    const block = [];
-    str = str.split(' ');
-    for(var i in str) {
-        const word = str[i];
-        const accFieldMatches = [...word.matchAll(accessFieldRegex)];
-        /*if(accFieldMatches.length) {
-            console.log(accFieldMatches)
-            for(const i in accFieldMatches) {
-                const match = accFieldMatches[i];
-                const span = document.createElement("span");
-                span.classList = "field";
-                block.push(...handleThis(word.substring(accFieldMatches[i - 1]?.index ?? 0, match.index), it));
-                span.innerText = match[0];
-                block.push(span);
-                block.push(...handleThis(word.substring(match.index + match[0].length, (accFieldMatches[i + 1]?.index ?? word.length)) + (str.length>1 ? ' ' : ''), it));
-            }
-        }*/
-        // use regex on processed code rather than "along the way" with recursion
-        // much easier
-        /*else if(extraMatches.length) {
-            for(const i in extraMatches) {
-                const match = extraMatches[i];
-                const span = document.createElement("span");
-                span.classList = "misc";
-                block.push(...handleThis(word.substring(extraMatches[i - 1]?.index ?? 0, match.index), it));
-                span.innerText = match[0];
-                block.push(span);
-                block.push(...handleThis(word.substring(match.index + 1, extraMatches[i + 1]?.index ?? word.length), it));
-            }
-        } else */ {
-            const span = document.createElement("span");
-            span.innerText += word + (parseInt(i) === str.length - 1 || (it>1 && !word.length)  ? '' : ' ');
-            block.push(span);
-        }
-    }
+function handleThis(str) {
+    const span = document.createElement("span");
+    span.innerText += str;
 
-    return block;
+    return span;
 }
 
 // Syntax is not checked. only highlighting is available
 window.addEventListener("DOMContentLoaded", function() {
     for(const element of document.getElementsByClassName("codeeditor")) {
-        var java = element.getElementsByTagName("java")[0]
-        if(!java) continue;
-        java = java.textContent;
+        var javaEl = element.getElementsByTagName("java")[0]
+        if(!javaEl) continue;
+        /**
+         * @type {string}
+         */
+        const java = javaEl.textContent;
         const preview = document.createElement("pre");
         preview.classList = "preview";
         var lowestCutoff = -1;
@@ -98,118 +64,69 @@ window.addEventListener("DOMContentLoaded", function() {
         var toolTip = "";
 
         // split code block into lines, and remove all leading whitespaces so code isn't put far off screen
-        const lines =java.split('\n').map(line => line.substring(lowestCutoff)).filter((l, i, a) => i == 0 || i == a.length-1 ? l.trim().length : true);
+        const lines = java.split('\n').map(line => line.substring(lowestCutoff)).filter((l, i, a) => i == 0 || i == a.length-1 ? l.trim().length : true);
         for(const cIn in lines) {
-            const code = lines[cIn];
-            if(code.trim().length > 0 && noFormat) {
+            const line = lines[cIn];
+            if(line.trim().length > 0 && noFormat) {
                 const __ = document.createElement("span");
                 __.classList = "method";
-                __.innerText = code + '\n';
+                __.innerText = line + '\n';
                 preview.appendChild(__);
             }
 
             // split code line into words
             const lineEl = document.createElement("div");
             lineEl.classList = "line";
-            if(code.trimStart().startsWith('|')) {
-                toolTip += code.trimStart().substring(1).trimStart() + '\n';
+            if(line.trimStart().startsWith('|')) {
+                toolTip += line.trimStart().substring(1).trimStart() + '\n';
             } else {
+                lineEl.innerText = line;
+                for(const regex of [
+                    // Safari doesn't do lookarounds correctly. Involved MAJOR refactoring of code
+                    // add tooltip at the end so we can simply stay focused on strings without HTML attributes making life hard
+                    [/(?<!(\\|<a\s+class=(("|')?string("|')?>?)?))"/m, `"`],
+                    [/(?<!(\\|<a\s+class=(("|')?string("|')?>?)?))'/m, `'`]
+                ]) {
+                    const stSt = `<a class='string'>${regex[1]}`;
+                    const enSt = `${regex[1]}</a>`;
+                    var times = 0;
+                    while(regex[0].test(lineEl.innerHTML)) {
+                        lineEl.innerHTML = lineEl.innerHTML.replace(regex[0], 
+                            times++ % 2 === 0 ? stSt : enSt
+                        );
+                        // Too many times for my code.
+                        if(times > 50) break;
+                    }
+                }
+                
+                lineEl.innerHTML = lineEl.innerHTML
+                    .replaceAll(methodRegex, "<a class='method'>$&</a>")
+                    .replaceAll(keywordRegex, `<a class="keyword">$&</a>`)
+                    .replaceAll(annotationRegex, `<a class="annotation">$&</a>`)
+                    .replaceAll(numberRegex, `<a class="number">$&</a>`);
+
                 if(toolTip.length) {
                     lineEl.setAttribute("data-tooltip", toolTip);
                     toolTip = "";
-                }
-                for(const word of code.split(' ')) {
-                    const wordEl = document.createElement("span");
-                    let manipulate = false;
-                    {
-                        const keywordMatches = [...word.matchAll(wordRegex)].filter(m => keywords.includes(m[0]));
-                        // if(keywordMatches.length) console.log(keywordMatches);
-                        // we could replace this with one giant for loop instead of repeating code
-                        for(const i in keywordMatches) {
-                            const match = keywordMatches[i];
-                            if(i === "0") handleThis(match.input.substring(0,match.index)).forEach(e => wordEl.appendChild(e));
-                            const kw = document.createElement("span");
-                            kw.classList = "keyword";
-                            kw.innerText = match[0];
-                            wordEl.appendChild(kw);
-                            handleNons(i, keywordMatches, match, wordEl);
-                            manipulate = true;
-                        }
-
-                        const annotationMatches = [...word.matchAll(annotationRegex)];
-                        for(const i in annotationMatches) {
-                            const match = annotationMatches[i];
-                            const kw = document.createElement("span");
-                            kw.classList = "annotation";
-                            kw.innerText = match[0];
-                            wordEl.appendChild(kw);
-                            handleNons(i, annotationMatches, match, wordEl);
-                            manipulate = true;
-                        }
-
-                        const numberMatches = [...word.matchAll(numberRegex)];
-                        for(const i in numberMatches) {
-                            const match = numberMatches[i];
-                            if(i === "0") handleThis(match.input.substring(0,match.index)).forEach(e => wordEl.appendChild(e));
-                            const kw = document.createElement("span");
-                            kw.classList = "number";
-                            kw.innerText = match[0];
-                            wordEl.appendChild(kw);
-                            handleNons(i, numberMatches, match, wordEl);
-                            manipulate = true;
-                        }
-
-                    }
-
-                    lineEl.appendChild(wordEl);
-                    handleThis((manipulate ? '' : word) + ' ').forEach(e => lineEl.appendChild(e));
                 }
                 preview.appendChild(lineEl);
                 if(cIn != lines.length - 1) preview.appendChild(document.createElement("br"));
             }
         }  
         preview.innerHTML = preview.innerHTML
-            // THESE NEED TO BE FIXED.
-            // TRY BREAKING IT UP INTO TWO PARTS?
-            .replaceAll(
-                /(?<!\\|(class|data-tooltip)=((")[^"<>]*?)?)"(?!>).*?(?<!\\|(class|data-tooltip)=((")[^"<>]*?)?)("|<\/div>)(?!>)/gms,
-                "<a class=\"string\">$&</a>")
-            .replaceAll(
-                /(?<!\\|(class|data-tooltip)=((")[^"<>]*?)?)'(?!>).*?(?<!\\|(class|data-tooltip)=((")[^"<>]*?)?)('|<\/div>)(?!>)/gms,
-                "<a class='string'>$&</a>")
             .replaceAll(
                 /(?<=\.\s*?)(?<!data-tooltip=("|')[^"']*?)\w+?(?=\s*?\.)/gms,
                 "<a class=\"field\">$&</a>")
-            .replaceAll(
-                /(?<!(=|new|div\s+?class="line">)(<\/span>|<span>|\s)*?)(?<=(<\/span>|<span>)*?\s*?<span>)[A-Za-z_]\w+(?=\s*?(<\/span>|<span>)*?\()(?![{[])/g,
-                ///(?<!(=|new)(<\/span>|<span>|\s*?)*?)(?<=(<\/span>|<span>)*?\s*?<span>)[A-Za-z_]\w+(?=\s*?(<\/span>|<span>)*?\()(?![{[])/g,
-                "<a class='method'>$&</a>")
             .replaceAll(
                 /\/\/.*?(?=<br>)/g,
                 "<a class='comment'>$&</a>")
             .replaceAll(
                 /(?<!data-tooltip=("|')[^<>]*?)(?<!&(l|g)t)(,|;)/gs,
-                "<a class='misc'>$&</a>")
+                "<a class='misc'>$&</a>"); 
         /* */
-            .replaceAll(
-                /<span><\/span>/g,
-                "");
         element.appendChild(preview);
 
-        /*
-         *  <div class="console">
-                <div class="consoleheader">
-                    <a class="btn run">▶</a>
-                    <a class="btn" data-tooltip="Clear the console">🗑️</a>
-                    <a class="btn btnoff" data-tooltip="Stop running the program">🛑</a>
-                    <span class="cnstxt">Runnable Demo (Console Output)</span>
-                </div>
-                <hr>
-                <div class="stout">
-                </div>
-            </div>
-         */
-
+        // Add console
         const stdout = document.createElement("div");
         stdout.classList = "console";
         const cnHeader = document.createElement("div");
@@ -226,6 +143,7 @@ window.addEventListener("DOMContentLoaded", function() {
         offBtn.setAttribute("data-tooltip", "Stop running the program");
         const stout = Object.assign(document.createElement("div"), { classList: "stout", innerText: "..." });
 
+        // Temporarily change the definition of console.log to add text to an element
         runBtn.addEventListener("click", function() {
             stout.innerText = "";
             const realConsole = console.log;
@@ -236,6 +154,7 @@ window.addEventListener("DOMContentLoaded", function() {
                     stout.innerText += data.join(' ') + '\n';
                 }
             }
+            // Usage of eval but WHATEVER
             eval(implementedScript.innerText);
             console.log("$end");
             console.log = realConsole;
@@ -250,7 +169,7 @@ window.addEventListener("DOMContentLoaded", function() {
         cnHeader.appendChild(offBtn);
         cnHeader.appendChild(Object.assign(document.createElement("span"), { classList:"cnstxt", innerText: (implementedScript.getAttribute("data-label") ?? "") + " Runnable Demo (Output)" }));
         stdout.appendChild(cnHeader);
-        stdout.appendChild(Object.assign(document.createElement("hr")));
+        stdout.appendChild(Object.assign(document.createElement("hr"), { classList: "nomg" }));
         stdout.appendChild(stout);
         element.appendChild(stdout);
 
