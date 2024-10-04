@@ -14,16 +14,6 @@ const keywords = [
     "true",     "false",    "record",
 ];
 
-/**
- * @param {number} i 
- * @param {RegExpMatchArray[]} matches 
- * @param {RegExpMatchArray} match 
- * @param {HTMLElement} wordEl 
- */
-function handleNons(i, matches, match, wordEl) {
-    wordEl.appendChild(handleThis(match.input.substring(match.index + match[0].length, (matches[parseInt(i) + 1]?.index || match.input.length))));
-}
-
 // Adds whatever you will see in the java tags
 const noFormat = false;
 const keywordRegex = new RegExp("(?<!\\w|((span|div|pre) (class)?[^<]*?))(" + keywords.join('|') + ")(?!\\w)", 'g');
@@ -74,7 +64,6 @@ window.addEventListener("DOMContentLoaded", function() {
                 preview.appendChild(__);
             }
 
-            // split code line into words
             const lineEl = document.createElement("div");
             lineEl.classList = "line";
             if(line.trimStart().startsWith('|')) {

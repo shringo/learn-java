@@ -10,15 +10,17 @@
             "WTF is this?" 🤔
         </div>
         <br>
-        <a class="link" href="./index.html">
-            Go home
-        </a>
+        <div class="linkcontainer">
+            <a class="link" href="./index.html">
+                Go home
+            </a>
+        </div>
         <br><br>
         <div>
             <h1>Intro</h1>
             <i>"What is one skill that the world should learn?"</i>
             <br>
-            <pre>   -A question posed by ENG100 professor: Self-Intro Presentation</pre>
+            <pre style="text-wrap: wrap;">   -A question posed by ENG100 professor: Self-Intro Presentation</pre>
             <br>
             The presentation is split up into a lecture and activity and is meant to be done in about 10 minutes. This website is intended to be the "activity" portion.
             <br><br>
@@ -28,17 +30,23 @@
             <br><br>
             Indirect help from stackoverflow on tooltips and shortening code
             <br><br>
-            Held together using glue
+            Held together using glue and broken dreams
             <br><br>
             See the (janky) source code <a class="link" href="https://github.com/shringo/learn-java">here</a>.
             <br><br>
             How to pronounce pseudo: Puh-sway-doh
-            <h1>"Technical" Details</h1>
+            <h1>"Technical" Details / Commentary</h1>
             I don't know why I didn't just use a library such as <a class="link" href="https://highlightjs.org/">highlight.js</a>, but I guess I wanted a challenge and to impress the class. (I also wasn't looking for something like that 😬)
             <br><br> 
-            So, in order to do my own highlighting, I created a custom HTML tag named "java", inside an div with codeeditor as the class. Then, I linked a script so we look for every element with the codeeditor class. We go through each line of code, word by word (separated by spaces) and apply the appropriate color to that word through CSS classes by placing it inside of a span tag.
+            So, in order to do my own highlighting, I created a custom HTML tag named "java", inside an div with codeeditor as the class. Then, I linked a script so we look for every element with the codeeditor class. We go through each line of code, and apply string formatting first via  on innerHTML so we don't have to account for tags with attributes applied to them. Then, we can apply other formattings using regexes and replaceAll with context-sensitive things like making method names (not calls) yellow, keywords like int but not ...println() red & bold, annotations lime, and numbers blue. Semicolons and commas are made red, field accessors like out in sys.out.println() are made purple and italic (though the util in import java.util.List is also made purple). Finally, comments are made dark green. 
             <br><br>
-            Doing String highlighting was the worst to implement in my opinion. I ended up doing syntax highlighting and running RegExps on the almost finished HTML code, and did this with other things like commas, semicolons, comments, and making method names yellow. Syntax highlighting is obviously made on demand, if you ask. (View the HTML file source on GitHub, and open DevTools when opening the main webpage if you don't believe me)
+            To process tooltips, in the Java HTML tag, I denote comments using the pipe (|) character. Multiple lines of comments are one giant comment for the line of code below it. The tooltip is added to the line element last because the regexes applied will most certainly interfere with it.
+            <br><br>
+            Learning that Safari and Mobile devices existed caused a huge change in the code since Safari doesn't handle lookarounds the same way that Chrome does, thus breaking the formatting and requiring workarounds...that still use regexes...
+            <br><br>
+            I only tested this on my custom build of macOS Chromium, macOS Safari 16~, and Simulator iOS' Safari. If you're using Edge or Opera or Firefox, you might be SoL or completely fine since I think they're all built upon Chromium. So, if you're using Arc, (which WTF is that?) then it will also work.
+            <br><br>
+            Definitely not efficient, but it works! 
             <br><br>
             You can easily break the highlighting by putting numbers in a class' or method's name. I had a few midterms coming up and just did whatever worked. 
             <br><br>
@@ -47,10 +55,6 @@
             Once again, if you are interested, you can view the janky source code <a class="link" href="https://github.com/shringo/learn-java">here</a>.
             <br><br>
             In terms of design, I drew heavy inspiration from my favorite IDE: <a class="link" href="https://www.jetbrains.com/idea/">Intellij Idea CE</a>. The <a class="link" href="https://www.jetbrains.com/lp/mono/">font used on this webpage</a> is also made by them.
-            <br><br>
-            Major code refactors made because of Safari and mobile
-            <br></br>
-            Works best with Chrome
         </div>
     </body>
 </html>
