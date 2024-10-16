@@ -126,7 +126,7 @@ window.addEventListener("DOMContentLoaded", function() {
         // Quick! Add a button that doesn't do anything!
         const offBtn = Object.assign(document.createElement("a"), { classList: "btn btnoff", innerText: '🛑' });
         offBtn.setAttribute("data-tooltip", "Stop running the program");
-        const stout = Object.assign(document.createElement("div"), { classList: "stout", innerText: "..." });
+        const stout = Object.assign(document.createElement("pre"), { classList: "stout", innerText: "..." });
 
         // Temporarily change the definition of console.log to add text to an element
         runBtn.addEventListener("click", function() {

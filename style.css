@@ -428,9 +428,11 @@ input[type="text"] {
 }
 
 input[type="radio"] {
-    accent-color: #00ff00;
+    accent-color: #ff8c00;
     vertical-align: baseline;
     margin-top: auto;
+    height: 0.6em;
+    width: 0.6em;
     margin-bottom: auto;
 }
 
@@ -459,7 +461,7 @@ div.wrong {
 }
 
 .quizsnippet[data-tooltip]:hover:after {
-    font-size: 0.75em;
+    font-size: 1em;
     margin-top: 3.6em;
     max-width: 50%;
 }

@@ -188,8 +188,10 @@
                     private String name;
                     private int year;
 
-                    | This "method" has no return type because it is a special method called a constructor. When an subclass instance of student is created, this is the first method that gets called.
-                    | You will usually see the return type wedged between the "public" and method name.
+                    | This "method" has no return type because it is a special method called a constructor. 
+                    | When an subclass instance of student is created, this is the first method that needs to be called.
+                    | To distinguish a constructor from a method, you will usually see the return type wedged between the "public" and method name.
+                    | The constructor's name is also the same as the class name.
                     public Student(String name, int year) {
                         | this.name refers to the private String name variable outside of the constructor.
                         | name by itself refers to the argument passed in the constructor (Student(String name •••))
@@ -242,6 +244,69 @@
                     }
                 }
             </java>
+        </div>
+
+        <div class="example">
+            Advanced Example 2 - "Insertion Sort" 🌶️🌶️🌶️🌶️🌶️
+        </div>
+        <div class="codeeditor">
+            <java>
+                import java.util.Arrays; 
+
+                | Insertion Sort is a sorting algorithm that lets us sort an array of integers (or anything really) so they can be in ascending / descending order.
+                | For all our numbers, we take the nth number, and move it back if the n-1th number is greater than the nth number.
+                | This process is repeated until we come across a number where this statement doesn't hold.
+                | Then, we move onto the next number in the array until we reach the end.
+                | By the end, the array will be sorted.
+                |
+                | Sorting is usually used to make searching the array easier for later.
+                | For example, your contacts list is sorted alphabetically.
+                public class InsertionSort {
+                    public static void main(String[] args) {
+                        | Here is an array of numbers, unsorted from 0 to 9.
+                        int[] numbers = { 9, 7, 8, 5, 2, 1, 3, 4, 6, 0 };
+                        | For reference, we print it.
+                        System.out.println("Original Array:   " + Arrays.toString(numbers));
+                        | We look at all numbers from 1 to numbers.length
+                        | Usually the index (i) starts at 0, but we do a comparison to j - 1 while also setting j to i.
+                        | This means if j is i is 0, j - 1 (0 - 1 == -1) is not a valid index and will crash our program.
+                        for(int i = 1; i &lt; numbers.length; i++) {
+                            // ...
+                            | And for the number at i, we run whatever's in here until we reach 0 (the first number)
+                            for(int j = i; j &gt; 0; j--) {
+                                | If this number is less than the number before it, we move it back
+                                | The number will be moved back until the number before it is smaller.
+                                if(numbers[j] &lt; numbers[j - 1]) {
+                                    | To "swap" things in Java, and other programming languages (sans Python, C, C++, ...), we require a temporary variable.
+                                    int temp = numbers[j];
+                                    numbers[j] = numbers[j - 1];
+                                    numbers[j - 1] = temp;
+                                }
+                            }
+                            | Code tweaked to help you visualize WTF the code does better (Hit the run button!)
+                            // Visualize the process of insertion sort
+                            System.out.println("After Iteration " + i + ": " + Arrays.toString(numbers));
+                        }
+                    }
+                }
+            </java>
+            <script type="text/javascript" data-label="Advanced Ex 2. Insertion Sort">
+                var numbers = [9, 7, 8, 5, 2, 1, 3, 4, 6, 0];
+                console.log(`Original Array:    [${numbers}]`);
+                for(var i = 1; i < numbers.length; i++) {
+                    var moveback = 0;
+                    for(var j = i; j > 0; j--) {
+                        if(numbers[j] < numbers[j - 1]) {
+                            var temp = numbers[j];
+                            numbers[j] = numbers[j - 1];
+                            numbers[j - 1] = temp;
+                            moveback++;
+                        }
+                    }
+                    console.log(`${new Array(`After Iteration ${i}: [`.length).fill(" ").join("")}${new Array(i - moveback).fill("  ").join("")}┏${new Array(moveback).fill("━").join("┯")}┩`)
+                    console.log(`After Iteration ${i}: [${numbers}]`);
+                }
+            </script>
         </div>
         <div class="center">
             <a class="quizbtn" href="./quiz.html" title="It'll be ez :)">Take the quiz.</a>

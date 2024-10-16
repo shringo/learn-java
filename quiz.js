@@ -64,6 +64,7 @@ window.addEventListener("DOMContentLoaded", function() {
         "w-14-3": "The syntax is correct, but this code suffers from a bug where all 3 blocks inside the if statements can be set off.",
 
         "w-15-1": "This is a quiz",
+        "w-15-2": ">:(",
               
         "c-1-1": "System is capital, and out, println are lowercase. println means print with a newline (when you hit the return key)",
         "c-2-1": "Remainder is the leftovers of division, this operator is called modulo.",
@@ -79,7 +80,6 @@ window.addEventListener("DOMContentLoaded", function() {
         "c-14-1": "Else statements make it so only one of these blocks will execute",
         "c-15-1": "But only in instances of the class.",
         "c-15-2": "Technically the truth!",
-        "c-15-3": ">:(",
 
         "na": "(No answer provided)"
 
@@ -119,7 +119,10 @@ window.addEventListener("DOMContentLoaded", function() {
                     answerBox.innerHTML += AnswerKey[chosenAnswer?.value ?? "na"];
 
                     answers.forEach(e => {
-                        if(e !== chosenAnswer) e.parentElement.setAttribute("data-tooltip", AnswerKey[e.value]);
+                        if(e !== chosenAnswer) {
+                            e.parentElement.setAttribute("data-tooltip", AnswerKey[e.value]);
+                            e.parentElement.setAttribute("onclick",`if(this.classList.contains("mobiletooltip")) this.classList.remove("mobiletooltip"); else this.classList.add("mobiletooltip");`);
+                        }
                         e.disabled = true;
                         if(e.value.startsWith("c")) e.parentElement.classList.add("answer");
                     });
