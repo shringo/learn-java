@@ -310,10 +310,10 @@ div.consoleheader {
 a.btn {
     background-color: rgb(43, 43, 43);
     font-size: 2vb;
-    height: 2.5vh;
+    height: 1.5em;
     margin-right: 0.5em;
     padding: 0.5vmin 0.5vmin;
-    width: 2.5vh;
+    width: 1.5em;
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -349,7 +349,7 @@ hr:not(.nomg) {
 
 .stout {
     min-height: 120px;
-    height: 20vh;
+    height: 7em;
     padding: 5px 10px;
     font-size: 2vb;
     word-break: normal;
@@ -364,7 +364,7 @@ hr:not(.nomg) {
     color: #000000;
     border-radius: 20px;
     font-weight: bold;
-    font-size: 3vh;
+    font-size: 3em;
     padding: 12.5px;
     cursor: pointer;
 }
